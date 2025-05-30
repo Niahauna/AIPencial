@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Trang Intro Automation</title>
+  <style>
+    :root {
+      --red: #E50914;
+      --white: #ffffff;
+      --black: #0a0a0a;
+      --gray: #f5f5f5;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background-color: var(--white);
+      color: var(--black);
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 3rem;
+      background-color: var(--white);
+      border-bottom: 1px solid var(--gray);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+    nav a {
+      color: var(--black);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: var(--red);
+    }
+    .language, .auth-buttons {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .btn-red {
+      background-color: var(--red);
+      border: none;
+      color: var(--white);
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s;
+    }
+    .btn-red:hover {
+      background-color: #c20811;
+    }
+    .hero {
+      text-align: center;
+      padding: 6rem 2rem;
+      background: linear-gradient(to bottom, var(--white), var(--gray));
+    }
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: var(--red);
+    }
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      color: #333;
+    }
+    .logo h2 {
+      color: var(--red);
+      font-size: 1.8rem;
+    }
+    select {
+      padding: 0.4rem;
+      border-radius: 4px;
+      border: 1px solid var(--gray);
+    }
+    .section {
+      padding: 4rem 2rem;
+      text-align: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--black);
+    }
+    .section p {
+      font-size: 1rem;
+      color: #444;
+      max-width: 700px;
+      margin: 0 auto 2rem;
+    }
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .tool-card {
+      background: var(--white);
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .tool-card:hover {
+      transform: translateY(-5px);
+    }
+    .tool-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 0.6rem;
+    }
+    .tool-card h3 {
+      color: var(--red);
+      margin-bottom: 0.3rem;
+      font-size: 1.3rem;
+    }
+    .info-section {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 3rem;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
+    }
+    .info-section .text, .info-section .image {
+      flex: 1 1 400px;
+    }
+    .info-section .text h3 {
+      font-size: 1.5rem;
+      color: var(--red);
+      margin-bottom: 0.8rem;
+    }
+    .info-section .text p {
+      font-size: 1.1rem;
+      color: #333;
+      line-height: 1.4;
+    }
+    .info-section .image img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+    footer {
+      background-color: var(--black);
+      color: var(--white);
+      padding: 3rem 2rem;
+      margin-top: 3rem;
+    }
+    .footer-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: space-between;
+      text-align: left;
+    }
+    .footer-section {
+      flex: 1 1 200px;
+    }
+    .footer-section h4 {
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+      color: var(--red);
+    }
+    .footer-section p, .footer-section a {
+      font-size: 0.95rem;
+      color: var(--white);
+      display: block;
+      margin-bottom: 0.5rem;
+      text-decoration: none;
+    }
+    .footer-section a:hover {
+      text-decoration: underline;
+    }
+    .social-icons a {
+      display: inline-block;
+      width: 32px;
+      height: 32px;
+      line-height: 32px;
+      text-align: center;
+      border-radius: 50%;
+      background-color: var(--red);
+      color: var(--white);
+      margin-right: 0.5rem;
+      font-weight: bold;
+      transition: background-color 0.3s;
+      text-decoration: none;
+    }
+    .social-icons a:hover {
+      background-color: #c20811;
+    }
+    .footer-section.newsletter form {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.8rem;
+    }
+    .footer-section.newsletter input[type="email"] {
+      flex: 1;
+      padding: 0.5rem 0.8rem;
+      border-radius: 6px;
+      border: none;
+      font-size: 1rem;
+    }
+    .footer-section.newsletter button {
+      background-color: var(--red);
+      border: none;
+      color: var(--white);
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s;
+    }
+    .footer-section.newsletter button:hover {
+      background-color: #c20811;
+    }
+
+    @media (max-width: 768px) {
+      .info-section {
+        flex-direction: column;
+      }
+      header {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      nav ul {
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <h2>AIPencil</h2>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#products">Sản phẩm</a></li>
+        <li><a href="#solutions">Giải pháp</a></li>
+        <li><a href="#info">Thông tin</a></li>
+        <li><a href="#store">Cửa hàng</a></li>
+      </ul>
+    </nav>
+    <div class="language">
+      <select>
+        <option>VI</option>
+        <option>EN</option>
+      </select>
+    </div>
+    <div class="auth-buttons">
+      <button class="btn-red" onclick="location.href='login.html'">Đăng nhập</button>
+      <button class="btn-red" onclick="location.href='dashboard.html'">Dùng thử</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>Giải pháp Automation thông minh cho doanh nghiệp</h1>
+    <p>Tự động hóa các công việc lặp đi lặp lại, tối ưu thời gian và hiệu suất làm việc với AutoTool.</p>
+    <button class="btn-red" onclick="location.href='signup.html'">Bắt đầu dùng thử</button>
+  </section>
+
+  <section id="products" class="section">
+    <h2>Sản phẩm Automation nổi bật</h2>
+    <p>Những công cụ automation mạnh mẽ giúp doanh nghiệp và cá nhân tiết kiệm thời gian, giảm thiểu sai sót và tăng hiệu quả.</p>
+    <div class="tools-grid">
+      <div class="tool-card">
+        <img src="https://source.unsplash.com/400x250/?form,automation" alt="Auto điền form">
+        <h3>Auto điền form</h3>
+        <p>Tự động điền các biểu mẫu trực tuyến nhanh chóng, chính xác, giúp tiết kiệm thời gian nhập liệu thủ công.</p>
+      </div>
+      <div class="tool-card">
+        <img src="https://source.unsplash.com/400x250/?payment,automation" alt="Auto lấy thông tin thanh toán">
+        <h3>Auto lấy thông tin thanh toán</h3>
+        <p>Thu thập và quản lý thông tin thanh toán từ nhiều nguồn khác nhau một cách tự động, giảm thiểu rủi ro sai sót.</p>
+      </div>
+      <div class="tool-card">
+        <img src="https://source.unsplash.com/400x250/?calendar,automation" alt="Automation Google Calendar">
+        <h3>Automation Google Calendar</h3>
+        <p>Tự động lập lịch, nhắc nhở và đồng bộ sự kiện trên Google Calendar giúp quản lý thời gian hiệu quả.</p>
+      </div>
+      <div class="tool-card">
+        <img src="https://source.unsplash.com/400x250/?facebook,bot" alt="Bot chat Facebook Page">
+        <h3>Bot chat Facebook Page</h3>
+        <p>Tự động trả lời tin nhắn và tương tác với khách hàng trên trang Facebook của bạn 24/7.</p>
+      </div>
+      <div class="tool-card">
+        <img src="https://source.unsplash.com/400x250/?zalo,chatbot" alt="Chatbot Zalo">
+        <h3>Chatbot Zalo</h3>
+        <p>Giải pháp chatbot thông minh trên Zalo giúp trả lời tự động và chăm sóc khách hàng hiệu quả.</p>
+      </div>
+      <div class="tool-card">
+        <img src="https://source.unsplash.com/400x250/?message,zalo" alt="Gửi tin nhắn Zalo cá nhân">
+        <h3>Gửi tin nhắn Zalo cá nhân</h3>
+        <p>Tự động gửi tin nhắn quảng cáo và chăm sóc khách hàng từ tài khoản Zalo cá nhân.</p>
+      </div>
+      <div class="tool-card">
+        <img src="https://source.unsplash.com/400x250/?customer,service,bot" alt="Bot chăm sóc khách hàng">
+        <h3>Bot chăm sóc khách hàng</h3>
+        <p>Tự động phản hồi, giải đáp thắc mắc và hỗ trợ khách hàng mọi lúc mọi nơi.</p>
+      </div>
+      <div class="tool-card">
+        <img src="https://source.unsplash.com/400x250/?facebook,post,automation" alt="Tự động đăng bài Facebook">
+        <h3>Tự động đăng bài Facebook</h3>
+        <p>Lên lịch và tự động đăng bài viết, hình ảnh trên Facebook giúp tăng tương tác và duy trì hoạt động trang cá nhân/doanh nghiệp.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="solutions" class="section" style="background: var(--gray);">
+    <h2>Giải pháp cho từng ngành</h2>
+
+    <div class="info-section">
+      <div class="image"><img src="https://source.unsplash.com/500x300/?education,technology" alt="Automation cho giáo dục" /></div>
+      <div class="text">
+        <h3>Giáo dục</h3>
+        <p>Ứng dụng automation giúp tự động gửi thông báo, nhắc lịch học, thu thập điểm số và quản lý tài liệu cho giáo viên và học sinh.</p>
+      </div>
+    </div>
+
+    <div class="info-section" style="flex-direction: row-reverse;">
+      <div class="image"><img src="https://source.unsplash.com/500x300/?marketing,digital" alt="Automation cho marketing" /></div>
+      <div class="text">
+        <h3>Marketing</h3>
+        <p>Tự động hóa chiến dịch quảng cáo, gửi email marketing, quản lý tương tác khách hàng và phân tích dữ liệu chiến dịch.</p>
+      </div>
+    </div>
+
+    <div class="info-section">
+      <div class="image"><img src="https://source.unsplash.com/500x300/?finance,automation" alt="Automation cho tài chính" /></div>
+      <div class="text">
+        <h3>Tài chính</h3>
+        <p>Tự động thu thập báo cáo, xử lý giao dịch và giám sát chi phí giúp tăng độ chính xác và giảm thời gian xử lý tài chính.</p>
+      </div>
+    </div>
+
+    <div class="info-section" style="flex-direction: row-reverse;">
+      <div class="image"><img src="https://source.unsplash.com/500x300/?customer,service,automation" alt="Automation chăm sóc khách hàng" /></div>
+      <div class="text">
+        <h3>Chăm sóc khách hàng</h3>
+        <p>Chatbot tự động, trả lời nhanh và phân loại yêu cầu giúp nâng cao trải nghiệm khách hàng và giảm tải nhân viên.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="info" class="section">
+    <h2>Thông tin & Tin tức</h2>
+    <p>Cập nhật những bài viết, hội thảo và kiến thức mới nhất về công nghệ automation và cách ứng dụng thực tế.</p>
+
+    <div class="tools-grid">
+      <div class="tool-card">
+        <img src="https://source.unsplash.com/400x250/?seminar,technology" alt="Hội thảo automation" />
+        <h3>Hội thảo trực tuyến về Automation</h3>
+        <p>Tham gia các webinar chuyên sâu về xu hướng và công nghệ automation mới nhất.</p>
+      </div>
+      <div class="tool-card">
+        <img src="https://source.unsplash.com/400x250/?news,robot" alt="Tin tức automation" />
+        <h3>Tin tức công nghệ Automation</h3>
+        <p>Đón đọc các bài viết cập nhật về ứng dụng robot và tự động hóa trong nhiều lĩnh vực.</p>
+      </div>
+      <div class="tool-card">
+        <img src="https://source.unsplash.com/400x250/?guide,technology" alt="Hướng dẫn sử dụng" />
+        <h3>Hướng dẫn sử dụng AutoTool</h3>
+        <p>Tài liệu chi tiết và video hướng dẫn giúp bạn làm quen nhanh với các công cụ automation.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="store" class="section" style="background: var(--gray);">
+    <h2>Cửa hàng & Gói dịch vụ</h2>
+    <p>Chọn gói dịch vụ phù hợp để trải nghiệm và nâng cao hiệu quả công việc của bạn với AutoTool.</p>
+    <div class="tools-grid">
+      <div class="tool-card">
+        <h3>Gói Dùng thử miễn phí</h3>
+        <p>Trải nghiệm đầy đủ tính năng trong 7 ngày miễn phí.</p>
+        <ul>
+          <li>Tự động điền form</li>
+          <li>Bot chat Facebook và Zalo</li>
+          <li>Tự động đăng bài Facebook</li>
+        </ul>
+        <p><strong>Giá:</strong> Miễn phí</p>
+      </div>
+      <div class="tool-card">
+        <h3>Gói Cơ bản</h3>
+        <p>Dành cho cá nhân và doanh nghiệp nhỏ.</p>
+        <ul>
+          <li>Tất cả tính năng dùng thử</li>
+          <li>Hỗ trợ Email & Chat</li>
+          <li>Quản lý đa kênh đơn giản</li>
+        </ul>
+        <p><strong>Giá:</strong> 199,000 VNĐ/tháng</p>
+      </div>
+      <div class="tool-card">
+        <h3>Gói Nâng cao</h3>
+        <p>Phù hợp với doanh nghiệp vừa và lớn cần tự động hóa sâu rộng.</p>
+        <ul>
+          <li>Tích hợp CRM</li>
+          <li>Phân tích & Báo cáo nâng cao</li>
+          <li>Hỗ trợ ưu tiên 24/7</li>
+        </ul>
+        <p><strong>Giá:</strong> 599,000 VNĐ/tháng</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h4>Liên hệ</h4>
+        <p>Email: support@autotool.vn</p>
+        <p>Điện thoại: 0961382006</p>
+        <p>Địa chỉ: 295 Thanh Nhàn Hai Bà Trưng Hà Nội</p>
+      </div>
+      <div class="footer-section">
+        <h4>Mạng xã hội</h4>
+        <div class="social-icons">
+          <a href="#" aria-label="Facebook">F</a>
+          <a href="#" aria-label="Twitter">T</a>
+          <a href="#" aria-label="LinkedIn">L</a>
+          <a href="#" aria-label="Instagram">I</a>
+        </div>
+      </div>
+      <div class="footer-section newsletter">
+        <h4>Đăng ký nhận tin</h4>
+        <form>
+          <input type="email" placeholder="Nhập email của bạn" required />
+          <button type="submit">Gửi</button>
+        </form>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
