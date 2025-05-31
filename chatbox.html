@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" href="pictures/favicon.png" type="image/x-icon">
   <title>Chat UI</title>
   <style>
     :root {
@@ -21,7 +22,9 @@
     }
 
     body {
-      background: var(--gray-light);
+        
+
+      background-image: url(pictures/background.png);
       height: 100vh;
       display: flex;
       justify-content: center;
@@ -38,6 +41,7 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
+      margin-bottom: 10px;
     }
 
     .chat-header {
@@ -47,18 +51,91 @@
       align-items: center;
       gap: 10px;
       font-weight: bold;
+      position: relative;
     }
 
-    .chat-header select {
-      padding: 6px 10px;
+    .model-dropdown {
+      position: relative;
+      width: 250px;
+      user-select: none;
+    }
+
+    .logo {
+       width: 160px;
+      height: auto;
+      object-fit: contain;
+      cursor: pointer;
+      position: absolute;
+      right: 25px;
+    }
+
+    .selected-model {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      background: #fff;
+      border: 1px solid var(--gray-border);
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .selected-model #selectedModel {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: bold;
+    }
+
+    .selected-model #selectedModel img {
+      width: 20px;
+      height: 20px;
+    }
+
+    .selected-model .dropdown-arrow {
+      color: #888;
       font-size: 14px;
-      border-radius: 6px;
+    }
+
+    .model-options {
+      display: block;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border: 1px solid var(--gray-border);
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      z-index: 10;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    .model-options li {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 12px;
+      cursor: pointer;
+    }
+
+    .model-options li:hover {
+      background: #f0f0f0;
+    }
+
+    .model-options img {
+      width: 20px;
+      height: 20px;
     }
 
     .chat-body {
       flex: 1;
       padding: 1rem 2rem;
       overflow-y: auto;
+      display: flex;
+      flex-direction: column;
     }
 
     .chat-footer {
@@ -69,18 +146,6 @@
       gap: 0.5rem;
     }
 
-    .layout-options {
-      display: flex;
-      gap: 5px;
-    }
-
-    .layout-options button {
-      width: 30px;
-      height: 30px;
-      background: var(--white);
-      border: 1px solid var(--gray-border);
-      cursor: pointer;
-    }
 
     .chat-input-area {
       display: flex;
@@ -111,42 +176,194 @@
 
     .chat-message {
       margin: 10px 0;
-      background: #eee;
       padding: 10px 14px;
       border-radius: 10px;
       max-width: 70%;
+      word-wrap: break-word;
+      display: inline-block;
     }
 
     .chat-message.user {
       background: #d1e7ff;
       align-self: flex-end;
+      text-align: right;
+      margin-left: auto;
+      border-bottom-right-radius: 0;
     }
+
+    .chat-message.bot {
+      background: #eee;
+      align-self: flex-start;
+      text-align: left;
+      margin-right: auto;
+      border-bottom-left-radius: 0;
+    }
+
+        .circle-button {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid #ccc;
+      background: #fff;
+      padding: 4px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .circle-button img {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+    }
+
+    .circle-button:hover {
+      background: #f5f5f5;
+    }
+
+    .circle-button:active {
+      transform: scale(0.9);
+      transition: transform 0.1s;
+    }
+
+    .circle-button {
+      transition: transform 0.1s ease, background 0.2s;
+    }
+
+    .model-options {
+  transform: scaleY(0);
+  opacity: 0;
+  transform-origin: top;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  display: block; /* luôn giữ block, dùng scale để ẩn/hiện */
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid var(--gray-border);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  max-height: 200px;
+  overflow-y: auto;
+  pointer-events: none;
+}
+
+.model-options.show {
+  transform: scaleY(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.hero-section {
+  text-align: center;
+width: 100vw;
+  padding: 20px 10px;
+  background: linear-gradient(to bottom, #f9f4ff, transparent);
+}
+
+.hero-section h1 {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #111;
+  margin-bottom: 10px;
+}
+
+.hero-section .highlight {
+  color: #e53935; /* fallback */
+  background: linear-gradient(90deg, #ff5252, #e53935, #b71c1c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+.hero-section p {
+  font-size: 1.05rem;
+  color: #444;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* Optional: Căn giữa toàn bộ trang */
+body {
+  background-image: url(pictures/background.png);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 1rem;
+}
+
+
+
+
   </style>
 </head>
 <body>
+   <div class="hero-section">
+  <h1>Trò chuyện với <span class="highlight">OpenAI o4-mini</span></h1>
+</div>
   <div class="chat-wrapper">
+   
+
     <div class="chat-header">
-      <span>🤖</span> GPT-4.1 mini
-      <select>
-        <option>GPT-4.1 mini</option>
-        <option>GPT-4</option>
-        <option>GPT-3.5</option>
-      </select>
+      <div class="model-dropdown">
+        <div class="selected-model" id="modelToggle">
+          <span id="selectedModel">
+            <img src="pictures/chatgpt.png" alt="GPT" />
+            GPT- 4.1 mini
+          </span>
+          <span class="dropdown-arrow">&#9662;</span>
+        </div>
+        <ul class="model-options" id="modelOptions">
+          <li onclick="selectModel('GPT-4.1 mini', 'pictures/chatgpt.png')">
+            <img src="pictures/chatgpt.png" /> GPT- 4.1 mini
+          </li> 
+          <li onclick="selectModel('GPT o3', 'pictures/chatgpt.png')">
+            <img src="pictures/chatgpt.png" /> GPT o3
+          </li>
+          <li onclick="selectModel('GPT 4o', 'pictures/chatgpt.png')">
+            <img src="pictures/chatgpt.png" /> GPT 4o
+          </li>
+          <li onclick="selectModel('GPT-4.1 mini', 'pictures/chatgpt.png')">
+            <img src="pictures/chatgpt.png" /> GPT 4o - mini
+          </li>
+          <li onclick="selectModel('DeepSeek Chat', 'pictures/deepseek.png')">
+            <img src="pictures/deepseek.png" /> DeepSeek Chat
+          </li>
+          <li onclick="selectModel('DeepSeek Reasoning', 'pictures/deepseek.png')">
+            <img src="pictures/deepseek.png" /> DeepSeek Reasoning
+          </li>
+          <li onclick="selectModel('Claude Haiku 3', 'pictures/claude.png')">
+            <img src="pictures/claude.png" /> Claude Haiku 3
+          </li>
+          <li onclick="selectModel('Claude Sonnet 4', 'pictures/claude.png')">
+            <img src="pictures/claude.png" /> Claude Sonnet 4
+          </li>
+          <li onclick="selectModel('Claude Opus 3', 'pictures/claude.png')">
+            <img src="pictures/claude.png" /> Claude Opus 3
+          </li>
+          <li onclick="selectModel('Gemini 1.5', 'pictures/gemini.png')">
+            <img src="pictures/gemini.png" /> Gemini 1.5
+          </li>
+          <li onclick="selectModel('Gemini 2.0', 'pictures/gemini.png')">
+            <img src="pictures/gemini.png" /> Gemini 2.0
+          </li>
+        </ul>
+      </div>
+      <img class="logo" onclick="location.href='index.html'" src="pictures/logo.png">
+      <button class="circle-button" onclick="sendDefaultMessage()">
+      <img src="pictures/reload.png" alt="icon" />
+    </button>
+      <input type="hidden" id="ai-model" value="GPT-4.1 mini" />
     </div>
 
-    <div class="chat-body" id="chat-body">
-      <!-- Tin nhắn sẽ được thêm tại đây -->
-    </div>
+    <div class="chat-body" id="chat-body"></div>
 
     <div class="chat-footer">
-      <div class="layout-options">
-        <label>Bố cục</label>
-        <button title="1"></button>
-        <button title="2"></button>
-        <button title="3"></button>
-        <button title="4"></button>
-        <button title="5"></button>
-      </div>
       <div class="chat-input-area">
         <input type="text" placeholder="Hỏi bất cứ điều gì..." id="chatInput" />
         <button onclick="sendMessage()">➤</button>
@@ -155,19 +372,93 @@
   </div>
 
   <script>
+    const toggleButton = document.getElementById("modelToggle");
+    const modelOptions = document.getElementById("modelOptions");
+
+    toggleButton.addEventListener("mousedown", (e) => {
+      e.stopPropagation(); // ✅ ngăn lan ra ngoài
+      modelOptions.classList.toggle("show");
+    });
+
+
+
+
+    // Chọn model
+    function selectModel(name, iconUrl) {
+      const modelSpan = document.getElementById("selectedModel");
+      modelSpan.innerHTML = `<img src="${iconUrl}" /> ${name}`;
+      document.getElementById("ai-model").value = name;
+      modelOptions.classList.remove("show");
+      
+      const chatBody = document.getElementById("chat-body");
+      chatBody.innerHTML = "";
+
+    }
+
+    // Đóng dropdown khi click ra ngoài
+    window.addEventListener("click", function (e) {
+      if (!e.target.closest(".model-dropdown")) {
+          modelOptions.classList.remove("show");
+      }
+    });
+
+    // Gửi tin nhắn
     function sendMessage() {
       const input = document.getElementById("chatInput");
       const msg = input.value.trim();
+      const model = document.getElementById("ai-model").value;
+
       if (msg) {
         const chatBody = document.getElementById("chat-body");
+
         const bubble = document.createElement("div");
         bubble.className = "chat-message user";
         bubble.textContent = msg;
         chatBody.appendChild(bubble);
         input.value = "";
         chatBody.scrollTop = chatBody.scrollHeight;
+
+       // Chèn tin nhắn đang gõ
+        const aiBubble = document.createElement("div");
+        aiBubble.className = "chat-message bot";
+        aiBubble.textContent = "Đang phản hồi..."; // hoặc "AI đang gõ..." / hiệu ứng
+        chatBody.appendChild(aiBubble);
+        chatBody.scrollTop = chatBody.scrollHeight;
+
+        // Gửi yêu cầu tới n8n
+        fetch("https://n8n.aipencil.name.vn/webhook/model", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ model: model, message: msg })
+        })
+        .then(res => res.json())
+        .then(data => {
+          aiBubble.innerHTML = data.reply || "Không có phản hồi!";
+          chatBody.scrollTop = chatBody.scrollHeight;
+        })
+        .catch(err => {
+          aiBubble.textContent = "Lỗi gửi yêu cầu!";
+          chatBody.scrollTop = chatBody.scrollHeight;
+        });
+
       }
     }
+
+    // Gửi bằng Enter
+    document.getElementById("chatInput").addEventListener("keydown", function (e) {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+
+    function sendDefaultMessage() {
+      const chatBody = document.getElementById("chat-body");
+      chatBody.innerHTML = "";
+      const defaultText = "Làm mới cuộc trò chuyện"; // 👈 Bạn có thể thay đổi nội dung
+      document.getElementById("chatInput").value = defaultText;
+      sendMessage();
+}
   </script>
 </body>
 </html>

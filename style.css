@@ -1,83 +1,229 @@
-:root{
-    --text_color:red;
+
+:root {
+  --gray-light: #f5f5f5;
+  --gray-border: #ddd;
+  --white: #ffffff;
+  --purple: #7c3aed;
+  --text: #0a0a0a;
 }
 
-h1 {
-    color: var(--text_color) !important;
-    font-size: 40px;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-#second{
-    --my-color:black;
-    color: var(--my-color);
+body {
+  background-image: url(pictures/background.png);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-#second{
-    color: black !important;
+.chat-wrapper {
+  background: var(--white);
+  width: 90vw;
+  height: 90vh;
+  max-width: 1200px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
-.third{
-    color: purple;
+.chat-header {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--gray-border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  position: relative;
 }
 
-*{
-    color: blue;
+.model-dropdown {
+  position: relative;
+  width: 250px;
+  user-select: none;
 }
 
-.box{
-    width: 60px;
-    height: 60px;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.logo {
+  width: 160px;
+  height: auto;
+  object-fit: contain;
+  cursor: pointer;
+  position: absolute;
+  right: 25px;
 }
 
-.box1{
-    background-color: black;
-    margin: 10px 5px 10px 20px;
+.selected-model {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: #fff;
+  border: 1px solid var(--gray-border);
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
 }
 
-.box2{
-    background-color: orange;
-    padding: 10px 10px 10px 10px  ;
-    
+.selected-model #selectedModel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: bold;
 }
 
-.box3{
-    background-color: red;
-    box-sizing: border-box;
-
-    padding-top: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-bottom: 10px;
-
-    /* padding: 10px 10px 10px 10px top right bottom left */ 
-    border-top-width: 20px; 
-    border-right-width: 20px; 
-    border-left-width: 20px; 
-    border-bottom-width: 20px;
-    border: 10px black solid; 
-    /* viết ngắn gọn như margin và padding */
-    border-style: solid;
-    border-color: black;
-
+.selected-model #selectedModel img {
+  width: 20px;
+  height: 20px;
 }
 
-.box4{
-    width: 100vw;
-    height: 100vh;
-    background-image:linear-gradient(0, rgba(255, 255, 0, 0.5), rgba(0, 0, 255, 0.5)), url(https://u4d2z7k9.rocketcdn.me/wp-content/uploads/2021/10/rsz_sk_rahaman_hossain_1-min.jpg.webp);
-
-    background-size: 100%;
-    background-repeat: no-repeat;
+.selected-model .dropdown-arrow {
+  color: #888;
+  font-size: 14px;
 }
 
-#box5{
-    width:100%;
-    height: 40px;
-    background-color: black;
-    position: fixed;
-    top: 0;
+.model-options {
+  transform: scaleY(0);
+  opacity: 0;
+  transform-origin: top;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  display: block;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid var(--gray-border);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  max-height: 200px;
+  overflow-y: auto;
+  pointer-events: none;
+}
+
+.model-options.show {
+  transform: scaleY(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.model-options li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 12px;
+  cursor: pointer;
+}
+
+.model-options li:hover {
+  background: #f0f0f0;
+}
+
+.model-options img {
+  width: 20px;
+  height: 20px;
+}
+
+.chat-body {
+  flex: 1;
+  padding: 1rem 2rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--gray-border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.chat-input-area {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--gray-border);
+  border-radius: 12px;
+  overflow: hidden;
+  padding: 0.5rem;
+  background: #fff;
+}
+
+.chat-input-area input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  outline: none;
+  font-size: 15px;
+}
+
+.chat-input-area button {
+  background: var(--purple);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.chat-message {
+  margin: 10px 0;
+  padding: 10px 14px;
+  border-radius: 10px;
+  max-width: 70%;
+  word-wrap: break-word;
+  display: inline-block;
+}
+
+.chat-message.user {
+  background: #d1e7ff;
+  align-self: flex-end;
+  text-align: right;
+  margin-left: auto;
+  border-bottom-right-radius: 0;
+}
+
+.chat-message.bot {
+  background: #eee;
+  align-self: flex-start;
+  text-align: left;
+  margin-right: auto;
+  border-bottom-left-radius: 0;
+}
+
+.circle-button {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  background: #fff;
+  padding: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.1s ease, background 0.2s;
+}
+
+.circle-button img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.circle-button:hover {
+  background: #f5f5f5;
+}
+
+.circle-button:active {
+  transform: scale(0.9);
+  transition: transform 0.1s;
 }
