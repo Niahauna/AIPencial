@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chat UI</title>
+  <style>
+    :root {
+      --gray-light: #f5f5f5;
+      --gray-border: #ddd;
+      --white: #ffffff;
+      --purple: #7c3aed;
+      --text: #0a0a0a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: var(--gray-light);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .chat-wrapper {
+      background: var(--white);
+      width: 90vw;
+      height: 90vh;
+      max-width: 1200px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .chat-header {
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--gray-border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: bold;
+    }
+
+    .chat-header select {
+      padding: 6px 10px;
+      font-size: 14px;
+      border-radius: 6px;
+    }
+
+    .chat-body {
+      flex: 1;
+      padding: 1rem 2rem;
+      overflow-y: auto;
+    }
+
+    .chat-footer {
+      padding: 1rem 1.5rem;
+      border-top: 1px solid var(--gray-border);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .layout-options {
+      display: flex;
+      gap: 5px;
+    }
+
+    .layout-options button {
+      width: 30px;
+      height: 30px;
+      background: var(--white);
+      border: 1px solid var(--gray-border);
+      cursor: pointer;
+    }
+
+    .chat-input-area {
+      display: flex;
+      align-items: center;
+      border: 1px solid var(--gray-border);
+      border-radius: 12px;
+      overflow: hidden;
+      padding: 0.5rem;
+      background: #fff;
+    }
+
+    .chat-input-area input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      outline: none;
+      font-size: 15px;
+    }
+
+    .chat-input-area button {
+      background: var(--purple);
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .chat-message {
+      margin: 10px 0;
+      background: #eee;
+      padding: 10px 14px;
+      border-radius: 10px;
+      max-width: 70%;
+    }
+
+    .chat-message.user {
+      background: #d1e7ff;
+      align-self: flex-end;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-wrapper">
+    <div class="chat-header">
+      <span>🤖</span> GPT-4.1 mini
+      <select>
+        <option>GPT-4.1 mini</option>
+        <option>GPT-4</option>
+        <option>GPT-3.5</option>
+      </select>
+    </div>
+
+    <div class="chat-body" id="chat-body">
+      <!-- Tin nhắn sẽ được thêm tại đây -->
+    </div>
+
+    <div class="chat-footer">
+      <div class="layout-options">
+        <label>Bố cục</label>
+        <button title="1"></button>
+        <button title="2"></button>
+        <button title="3"></button>
+        <button title="4"></button>
+        <button title="5"></button>
+      </div>
+      <div class="chat-input-area">
+        <input type="text" placeholder="Hỏi bất cứ điều gì..." id="chatInput" />
+        <button onclick="sendMessage()">➤</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function sendMessage() {
+      const input = document.getElementById("chatInput");
+      const msg = input.value.trim();
+      if (msg) {
+        const chatBody = document.getElementById("chat-body");
+        const bubble = document.createElement("div");
+        bubble.className = "chat-message user";
+        bubble.textContent = msg;
+        chatBody.appendChild(bubble);
+        input.value = "";
+        chatBody.scrollTop = chatBody.scrollHeight;
+      }
+    }
+  </script>
+</body>
+</html>
