@@ -258,6 +258,26 @@
         gap: 1rem;
       }
     }
+
+    .tool-card {
+  background-size: contain;         /* Co ảnh phủ kín khung */
+  background-position: center;    /* Căn giữa ảnh */
+  background-repeat: no-repeat;   /* Không lặp lại */
+  height: 280px;                  /* Đặt chiều cao cố định cho khung */
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;      /* Đẩy nội dung xuống đáy */
+  color: white;                   /* Đảm bảo chữ nhìn rõ */
+  position: relative;
+  overflow: hidden;
+}
+
+    
   </style>
 </head>
 <body>
@@ -291,51 +311,53 @@
     <button class="btn-red" onclick="location.href='signup.html'">Bắt đầu dùng thử</button>
   </section>
 
-  <section id="products" class="section">
+ <section id="products" class="section">
     <h2>Sản phẩm Automation nổi bật</h2>
     <p>Những công cụ automation mạnh mẽ giúp doanh nghiệp và cá nhân tiết kiệm thời gian, giảm thiểu sai sót và tăng hiệu quả.</p>
     <div class="tools-grid">
-      <div class="tool-card">
-        <img src="https://source.unsplash.com/400x250/?form,automation" alt="Auto điền form">
-        <h3>Auto điền form</h3>
-        <p>Tự động điền các biểu mẫu trực tuyến nhanh chóng, chính xác, giúp tiết kiệm thời gian nhập liệu thủ công.</p>
-      </div>
-      <div class="tool-card">
-        <img src="https://source.unsplash.com/400x250/?payment,automation" alt="Auto lấy thông tin thanh toán">
-        <h3>Auto lấy thông tin thanh toán</h3>
-        <p>Thu thập và quản lý thông tin thanh toán từ nhiều nguồn khác nhau một cách tự động, giảm thiểu rủi ro sai sót.</p>
-      </div>
-      <div class="tool-card">
-        <img src="https://source.unsplash.com/400x250/?calendar,automation" alt="Automation Google Calendar">
-        <h3>Automation Google Calendar</h3>
-        <p>Tự động lập lịch, nhắc nhở và đồng bộ sự kiện trên Google Calendar giúp quản lý thời gian hiệu quả.</p>
-      </div>
-      <div class="tool-card">
-        <img src="https://source.unsplash.com/400x250/?facebook,bot" alt="Bot chat Facebook Page">
-        <h3>Bot chat Facebook Page</h3>
-        <p>Tự động trả lời tin nhắn và tương tác với khách hàng trên trang Facebook của bạn 24/7.</p>
-      </div>
-      <div class="tool-card">
-        <img src="https://source.unsplash.com/400x250/?zalo,chatbot" alt="Chatbot Zalo">
-        <h3>Chatbot Zalo</h3>
-        <p>Giải pháp chatbot thông minh trên Zalo giúp trả lời tự động và chăm sóc khách hàng hiệu quả.</p>
-      </div>
-      <div class="tool-card">
-        <img src="https://source.unsplash.com/400x250/?message,zalo" alt="Gửi tin nhắn Zalo cá nhân">
-        <h3>Gửi tin nhắn Zalo cá nhân</h3>
-        <p>Tự động gửi tin nhắn quảng cáo và chăm sóc khách hàng từ tài khoản Zalo cá nhân.</p>
-      </div>
-      <div class="tool-card">
-        <img src="https://source.unsplash.com/400x250/?customer,service,bot" alt="Bot chăm sóc khách hàng">
-        <h3>Bot chăm sóc khách hàng</h3>
-        <p>Tự động phản hồi, giải đáp thắc mắc và hỗ trợ khách hàng mọi lúc mọi nơi.</p>
-      </div>
-      <div class="tool-card">
-        <img src="https://source.unsplash.com/400x250/?facebook,post,automation" alt="Tự động đăng bài Facebook">
-        <h3>Tự động đăng bài Facebook</h3>
-        <p>Lên lịch và tự động đăng bài viết, hình ảnh trên Facebook giúp tăng tương tác và duy trì hoạt động trang cá nhân/doanh nghiệp.</p>
-      </div>
+  <div class="tool-card" style="background-image: url('pictures/tool_content.png');">
+    <div class="card-content">
+      <h3>Automation Ads</h3>
+      <p>Tự động chạy quảng cáo trên đa nền tảng, theo dõi hiệu quả và tối ưu chi phí theo thời gian thực.</p>
     </div>
+  </div>
+
+  <div class="tool-card" style="background-image: url('pictures/tool_customer.png');">
+    <div class="card-content">
+      <h3>Automation Customers Services</h3>
+      <p>Tự động hoá chăm sóc khách hàng từ tin nhắn, email, chatbot đến quản lý phản hồi.</p>
+    </div>
+  </div>
+
+  <div class="tool-card" style="background-image: url('pictures/tool_content.png');">
+    <div class="card-content">
+      <h3>Automation Content</h3>
+      <p>Tạo nội dung, đăng bài mạng xã hội và blog tự động hoá theo lịch trình và từ khoá.</p>
+    </div>
+  </div>
+
+  <div class="tool-card" style="background-image: url('pictures/tool_accountant.png');">
+    <div class="card-content">
+      <h3>Automation Accountant</h3>
+      <p>Tự động nhập liệu hoá đơn, tổng hợp báo cáo và đối soát thu chi hiệu quả.</p>
+    </div>
+  </div>
+
+  <div class="tool-card" style="background-image: url('pictures/tool_ai_assistant.png');">
+    <div class="card-content">
+      <h3>AI Assistant</h3>
+      <p>Trợ lý AI giúp hỗ trợ soạn thảo văn bản, trả lời email và gợi ý công việc thông minh.</p>
+    </div>
+  </div>
+
+  <div class="tool-card" style="background-image: url('pictures/tool_sales.png');">
+    <div class="card-content">
+      <h3>Automation Sales</h3>
+      <p>Hệ thống tự động quản lý quy trình bán hàng, nhắc nhở và theo dõi khách hàng tiềm năng.</p>
+    </div>
+  </div>
+</div>
+
   </section>
 
   <section id="solutions" class="section" style="background: var(--gray);">
@@ -411,12 +433,12 @@
         </ul>
         <p><strong>Giá:</strong> Miễn phí</p>
       </div>
-      <div class="tool-card">
+      <div class="tool-card">     
         <h3>Gói Cơ bản</h3>
         <p>Dành cho cá nhân và doanh nghiệp nhỏ.</p>
         <ul>
           <li>Tất cả tính năng dùng thử</li>
-          <li>Hỗ trợ Email & Chat</li>
+          <li>Hỗ trợ Email & Chat</li> 
           <li>Quản lý đa kênh đơn giản</li>
         </ul>
         <p><strong>Giá:</strong> 199,000 VNĐ/tháng</p>
