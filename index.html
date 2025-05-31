@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" href="pictures/favicon.png" type="image/x-icon">
@@ -11,12 +14,13 @@
       --white: #ffffff;
       --black: #0a0a0a;
       --gray: #f5f5f5;
+      --font-main: 'Kanit', sans-serif;
     }
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: var(--font-main);
     }
     body {
       background-color: var(--white);
@@ -116,7 +120,9 @@
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 2rem;
       margin-top: 2rem;
+      cursor: pointer;
     }
+
 
     
 
@@ -146,6 +152,17 @@
       margin-bottom: 0.3rem;
       font-size: 1.3rem;
     }
+
+    .tool-card li{
+      margin-left: 20px;
+    }
+
+   .tool-card p.price {
+      
+      margin-left: 0px;
+      margin-bottom: 0px;
+}
+
     .info-section {
       display: flex;
       flex-wrap: wrap;
@@ -301,6 +318,8 @@
 .tool-cardproduct:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  
 }
 
 .card-content {
@@ -329,6 +348,11 @@
   line-height: 1.4;
 }
 
+.card-content:hover{
+  background-color: rgba(0, 0, 0, 0.1); /* nền xám mờ */
+  transition: background-color 0.3s ease;
+}
+
 
 
   </style>
@@ -352,6 +376,7 @@
         <option>VI</option>
         <option>EN</option>
       </select>
+      <span>🌐</span>
     </div>
     <div class="auth-buttons">
       <button class="btn-red" onclick="location.href='login.html'">Đăng nhập</button>
@@ -418,7 +443,7 @@
     <h2>Giải pháp cho từng ngành</h2>
 
     <div class="info-section">
-      <div class="image"><img src="https://source.unsplash.com/500x300/?education,technology" alt="Automation cho giáo dục" /></div>
+      <div class="image"><img src="pictures/education.png" alt="Automation cho giáo dục" /></div>
       <div class="text">
         <h3>Giáo dục</h3> 
         <p>Ứng dụng automation giúp tự động gửi thông báo, nhắc lịch học, thu thập điểm số và quản lý tài liệu cho giáo viên và học sinh.</p>
@@ -426,7 +451,7 @@
     </div>
 
     <div class="info-section" style="flex-direction: row-reverse;">
-      <div class="image"><img src="https://source.unsplash.com/500x300/?marketing,digital" alt="Automation cho marketing" /></div>
+      <div class="image"><img src="pictures/marketing.png" alt="Automation cho marketing" /></div>
       <div class="text">
         <h3>Marketing</h3>
         <p>Tự động hóa chiến dịch quảng cáo, gửi email marketing, quản lý tương tác khách hàng và phân tích dữ liệu chiến dịch.</p>
@@ -434,7 +459,7 @@
     </div>
 
     <div class="info-section">
-      <div class="image"><img src="https://source.unsplash.com/500x300/?finance,automation" alt="Automation cho tài chính" /></div>
+      <div class="image"><img src="pictures/finance.png" alt="Automation cho tài chính" /></div>
       <div class="text">
         <h3>Tài chính</h3>
         <p>Tự động thu thập báo cáo, xử lý giao dịch và giám sát chi phí giúp tăng độ chính xác và giảm thời gian xử lý tài chính.</p>
@@ -442,7 +467,7 @@
     </div>
 
     <div class="info-section" style="flex-direction: row-reverse;">
-      <div class="image"><img src="https://source.unsplash.com/500x300/?customer,service,automation" alt="Automation chăm sóc khách hàng" /></div>
+      <div class="image"><img src="pictures/customerservice.png" alt="Automation chăm sóc khách hàng" /></div>
       <div class="text">
         <h3>Chăm sóc khách hàng</h3>
         <p>Chatbot tự động, trả lời nhanh và phân loại yêu cầu giúp nâng cao trải nghiệm khách hàng và giảm tải nhân viên.</p>
@@ -456,17 +481,17 @@
 
     <div class="tools-grid">
       <div class="tool-card">
-        <img src="https://source.unsplash.com/400x250/?seminar,technology" alt="Hội thảo automation" />
+        <img src="pictures/animation1.png" alt="Hội thảo automation" />
         <h3>Hội thảo trực tuyến về Automation</h3>
         <p>Tham gia các webinar chuyên sâu về xu hướng và công nghệ automation mới nhất.</p>
       </div>
       <div class="tool-card">
-        <img src="https://source.unsplash.com/400x250/?news,robot" alt="Tin tức automation" />
+        <img src="pictures/animation2.png" alt="Tin tức automation" />
         <h3>Tin tức công nghệ Automation</h3>
         <p>Đón đọc các bài viết cập nhật về ứng dụng robot và tự động hóa trong nhiều lĩnh vực.</p>
       </div>
       <div class="tool-card">
-        <img src="https://source.unsplash.com/400x250/?guide,technology" alt="Hướng dẫn sử dụng" />
+        <img src="pictures/animation3.png" alt="Hướng dẫn sử dụng" />
         <h3>Hướng dẫn sử dụng AutoTool</h3>
         <p>Tài liệu chi tiết và video hướng dẫn giúp bạn làm quen nhanh với các công cụ automation.</p>
       </div>
@@ -485,17 +510,17 @@
           <li>Bot chat Facebook và Zalo</li>
           <li>Tự động đăng bài Facebook</li>
         </ul>
-        <p><strong>Giá:</strong> Miễn phí</p>
+        <p class="price"><strong>Giá:</strong> <span class="price-highlight">Miễn phí</span></p>
       </div>
       <div class="tool-card">     
         <h3>Gói Cơ bản</h3>
-        <p>Dành cho cá nhân và doanh nghiệp nhỏ.</p>
+        <p>Dành cho cá nhân và doanh nghiệp vừa nhỏ.</p>
         <ul>
           <li>Tất cả tính năng dùng thử</li>
           <li>Hỗ trợ Email & Chat</li> 
           <li>Quản lý đa kênh đơn giản</li>
         </ul>
-        <p><strong>Giá:</strong> 199,000 VNĐ/tháng</p>
+        <p class="price"><strong>Giá:</strong> <span class="price-highlight">199,000 VNĐ/tháng</span></p>
       </div>
       <div class="tool-card">
         <h3>Gói Nâng cao</h3>
@@ -505,7 +530,7 @@
           <li>Phân tích & Báo cáo nâng cao</li>
           <li>Hỗ trợ ưu tiên 24/7</li>
         </ul>
-        <p><strong>Giá:</strong> 599,000 VNĐ/tháng</p>
+        <p class="price"><strong>Giá:</strong> <span class="price-highlight">599,000 VNĐ/tháng</span></p>
       </div>
     </div>
   </section>

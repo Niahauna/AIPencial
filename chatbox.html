@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="icon" href="pictures/favicon.png" type="image/x-icon">
   <title>Chat UI</title>
   <style>
     :root {
+      --font-main: 'Kanit', sans-serif;
       --gray-light: #f5f5f5;
       --gray-border: #ddd;
       --white: #ffffff;
@@ -18,7 +22,7 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: var(--font-main);
     }
 
     body {
@@ -233,70 +237,95 @@
     }
 
     .model-options {
-  transform: scaleY(0);
-  opacity: 0;
-  transform-origin: top;
-  transition: transform 0.2s ease, opacity 0.2s ease;
-  display: block; /* luôn giữ block, dùng scale để ẩn/hiện */
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background: #fff;
-  border: 1px solid var(--gray-border);
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 10;
-  max-height: 200px;
-  overflow-y: auto;
-  pointer-events: none;
-}
+      transform: scaleY(0);
+      opacity: 0;
+      transform-origin: top;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+      display: block; /* luôn giữ block, dùng scale để ẩn/hiện */
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border: 1px solid var(--gray-border);
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      z-index: 10;
+      max-height: 200px;
+      overflow-y: auto;
+      pointer-events: none;
+    }
 
-.model-options.show {
-  transform: scaleY(1);
-  opacity: 1;
-  pointer-events: auto;
-}
+    .model-options.show {
+      transform: scaleY(1);
+      opacity: 1;
+      pointer-events: auto;
+    }
 
-.hero-section {
-  text-align: center;
-width: 100vw;
-  padding: 20px 10px;
-  background: linear-gradient(to bottom, #f9f4ff, transparent);
-}
+    .hero-section {
+      text-align: center;
+    width: 100vw;
+      padding: 20px 10px;
+      background: linear-gradient(to bottom, #f9f4ff, transparent);
+    }
 
-.hero-section h1 {
-  font-size: 2.2rem;
-  font-weight: bold;
-  color: #111;
-  margin-bottom: 10px;
-}
+    .hero-section h1 {
+      font-size: 2.2rem;
+      font-weight: bold;
+      color: #111;
+      margin-bottom: 10px;
+    }
 
-.hero-section .highlight {
-  color: #e53935; /* fallback */
-  background: linear-gradient(90deg, #ff5252, #e53935, #b71c1c);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
+    .hero-section .highlight {
+      color: #e53935; /* fallback */
+      background: linear-gradient(90deg, #ff5252, #e53935, #b71c1c);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
 
-.hero-section p {
-  font-size: 1.05rem;
-  color: #444;
-  max-width: 720px;
-  margin: 0 auto;
-}
+    .hero-section p {
+      font-size: 1.05rem;
+      color: #444;
+      max-width: 720px;
+      margin: 0 auto;
+    }
 
-/* Optional: Căn giữa toàn bộ trang */
-body {
-  background-image: url(pictures/background.png);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 0 1rem;
-}
+    /* Optional: Căn giữa toàn bộ trang */
+    body {
+      background-image: url(pictures/background.png);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0 1rem;
+    }
 
+      .typing {
+      display: inline-block;
+      font-size: 24px;
+    }
+
+    .typing span {
+      display: inline-block;
+      animation: blink 1.2s infinite;
+      font-weight: bold;
+      color: #888;
+    }
+
+    .typing span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .typing span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes blink {
+      0%, 20% { opacity: 0; }
+      50% { opacity: 1; }
+      100% { opacity: 0; }
+    }
 
 
 
@@ -421,7 +450,11 @@ body {
        // Chèn tin nhắn đang gõ
         const aiBubble = document.createElement("div");
         aiBubble.className = "chat-message bot";
-        aiBubble.textContent = "Đang phản hồi..."; // hoặc "AI đang gõ..." / hiệu ứng
+        aiBubble.innerHTML = `
+  <span class="typing">
+    <span>.</span><span>.</span><span>.</span>
+  </span>
+`;
         chatBody.appendChild(aiBubble);
         chatBody.scrollTop = chatBody.scrollHeight;
 
